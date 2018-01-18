@@ -1,40 +1,21 @@
-import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
-import { fetchPost, fetchPosts } from '../actions/actions';
+import { fetchPost, fetchPosts, likePost, receivePosts } from '../actions/actions';
 import PostList from '../components/PostList';
 
-class RatingApp extends Component {
-  constructor(props) {
-    super(props);
-
-    this.onPostClick = this.onPostClick.bind(this);
-  }
-
-  componentDidMount() {
-    fetchPosts(this.props.dispatch);
-  }
-
-  onPostClick(event, post) {
-    fetchPost(this.props.dispatch, post);
-  }
-
-  render() {
-    const posts = this.props.posts;
-
-    return (
-      posts.length > 0 &&
-      <PostList posts={posts} onPostClick={this.onPostClick} />
-    );
-  }
-}
-
-function mapStateToProps(state) {
-  const posts = state.posts.posts;
-
+const mapStateToProps = state => {
   return {
-    posts,
-  };
-}
+    posts: state.posts.posts,
+  }
+};
 
-export default connect(mapStateToProps)(RatingApp);
+const mapDispatchToProps = dispatch => {
+  return {
+    onPostClick: post => fetchPost(post).then(json => dispatch(likePost(json))),
+    fetchPosts: () => fetchPosts().then(json => dispatch(receivePosts(json))),
+  }
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(PostList);

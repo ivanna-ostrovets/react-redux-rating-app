@@ -4,10 +4,8 @@ import { Provider } from 'react-redux';
 import RatingApp from './containers/RatingApp';
 import configureStore from './store/configureStore';
 
-const store = configureStore();
-
 render(
-    <Provider store={store}>
+    <Provider store={configureStore()}>
       <RatingApp />
     </Provider>,
     document.getElementById('root'),

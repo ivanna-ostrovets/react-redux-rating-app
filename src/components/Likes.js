@@ -1,7 +1,7 @@
 import React from 'react';
 
-const Likes = (likes) => (
-  <span>{likes ? likes : 0} likes</span>
+const Likes = ({ likes }) => (
+  <span>{likes} likes</span>
 );
 
 export default Likes;
