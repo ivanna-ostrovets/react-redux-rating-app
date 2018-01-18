@@ -1,12 +1,9 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { Provider } from 'react-redux';
-import RatingApp from './containers/RatingApp';
 import configureStore from './store/configureStore';
+import Root from './components/Root';
 
 render(
-    <Provider store={configureStore()}>
-      <RatingApp />
-    </Provider>,
+    <Root store={configureStore()} />,
     document.getElementById('root'),
 );

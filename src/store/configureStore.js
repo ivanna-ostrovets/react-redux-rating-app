@@ -1,10 +1,10 @@
 import { createStore } from 'redux';
 import rootReducer from '../reducers/reducers';
 
-const configureStore = () => {
-  return createStore(
+const configureStore = () => (
+  createStore(
     rootReducer,
   )
-};
+);
 
 export default configureStore;
