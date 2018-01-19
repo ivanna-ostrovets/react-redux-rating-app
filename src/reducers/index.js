@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { RECEIVE_POSTS, LIKE_POST } from '../actions/actions';
+import { RECEIVE_POSTS, LIKE_POST } from '../actions/index';
 
 const posts = (state = { posts: [] }, action) => {
   switch (action.type) {

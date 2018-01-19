@@ -4,6 +4,6 @@ import configureStore from './store/configureStore';
 import Root from './components/Root';
 
 render(
-    <Root store={configureStore()} />,
-    document.getElementById('root'),
+  <Root store={configureStore()} />,
+  document.getElementById('root'),
 );
