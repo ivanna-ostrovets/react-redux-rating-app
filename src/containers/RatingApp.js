@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { fetchPost, fetchPosts, likePost, receivePosts } from '../actions/index';
+import { fetchPost, fetchPosts } from '../actions/index';
 import PostList from '../components/PostList';
 
 const mapStateToProps = state => ({
@@ -8,11 +8,11 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   onPostClick(post) {
-    fetchPost(post).then(json => dispatch(likePost(json)));
+    dispatch(fetchPost(post));
   },
 
   fetchPosts() {
-    fetchPosts().then(json => dispatch(receivePosts(json)))
+    dispatch(fetchPosts());
   },
 });
 

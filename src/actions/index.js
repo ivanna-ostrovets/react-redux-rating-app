@@ -14,28 +14,34 @@ export const likePost = post => ({
 });
 
 export const fetchPosts = () => (
-  fetch(`https://jsonplaceholder.typicode.com/posts`)
-    .then(response => handleErrors(response))
-    .then(response => response.json())
-    .then(posts => posts.map(post => {
-      post.likes = 0;
+  dispatch => {
+    return fetch(`https://jsonplaceholder.typicode.com/posts`)
+      .then(response => handleErrors(response))
+      .then(response => response.json())
+      .then(posts => posts.map(post => {
+        post.likes = 0;
 
-      return post;
-    }))
-    .catch(error => alert(error))
+        return post;
+      }))
+      .then(posts => dispatch(receivePosts(posts)))
+      .catch(error => alert(error))
+  }
 );
 
 export const fetchPost = post => (
-  fetch(`https://jsonplaceholder.typicode.com/posts/${post.id}`, {
-    method: 'PUT',
-    body: JSON.stringify(post),
-    headers: {
-      'Content-type': 'application/json; charset=UTF-8',
-    },
-  })
-    .then(response => handleErrors(response))
-    .then(response => response.json())
-    .catch(error => alert(error))
+  dispatch => {
+    return fetch(`https://jsonplaceholder.typicode.com/posts/${post.id}`, {
+      method: 'PUT',
+      body: JSON.stringify(post),
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+      },
+    })
+      .then(response => handleErrors(response))
+      .then(response => response.json())
+      .then(() => dispatch(likePost(post)))
+      .catch(error => alert(error))
+  }
 );
 
 const handleErrors = response => {
